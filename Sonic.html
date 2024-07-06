@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://denverlink.pages.dev/TP/css/bootstrap-reboot.min.css"/>
+    <link rel="stylesheet" href="https://denverlink.pages.dev/TP/css/bootstrap-grid.min.css"/>
+    <link rel="stylesheet" href="https://denverlink.pages.dev/TP/css/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="https://denverlink.pages.dev/TP/css/slider-radio.css"/>
+    <link rel="stylesheet" href="https://denverlink.pages.dev/TP/css/select2.min.css"/>
+    <link rel="stylesheet" href="https://denverlink.pages.dev/TP/css/magnific-popup.css"/>
+    <link rel="stylesheet" href="https://denverlink.pages.dev/TP/css/main.css"/>
+    <title></title>
+    <link rel="shortcut icon" type="image/x-icon" href="">
+    <link rel="stylesheet" href="https://denverisalive.github.io/Player.css">
+    <style>
+        /* Container to maintain 16:9 aspect ratio */
+        .player-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 aspect ratio (9/16 * 100) */
+            border-radius: 25px; /* Adjust this value to get the desired rounded corners */
+            overflow: hidden; /* Ensure content doesn't overflow the rounded corners */
+            background-color: #000; /* Optional: background color while the video loads */
+        }
+
+        /* JW Player element */
+        #myElement {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 20px; /* Same value as the container to match the rounded corners */
+        }
+
+        .program-info {
+            width: auto;
+            height: auto;
+            margin-top: 10px;
+            margin-bottom: 30px;
+            display: block;
+            padding: 10px
+        }
+
+        .logo {
+            display: inline-block;
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .channel-name {
+            color: white;
+            font-family: 'Fjalla One', sans-serif;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, .3);
+            margin-top: 10px;
+            margin-left: 10px;
+            font-size: 3.5rem;
+            position: absolute
+        }
+
+        .s-n {
+            font-family: 'Gloock', serif;
+            font-weight: 700;
+            color: #333;
+            margin-top: 0;
+            font-size: 1.5rem;
+            position: absolute;
+            color: darkcyan;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, .3)
+        }
+
+        .program-title {
+            color: white;
+            margin-top: 10px;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .program-description {
+            margin-top: 5px;
+            color: #666;
+            font-weight: 300
+        }
+
+        .program-timing {
+            margin-top: 5px;
+            font-style: italic;
+            color: #666
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .blink-dot {
+            width: 22px; /* Adjusted size of the dot */
+            height: 22px; /* Adjusted size of the dot */
+            border-radius: 50%;
+            margin-left: 20px; /* Shifted the dot a little bit to the right */
+            background-color: red;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                background-color: red;
+            }
+            50% {
+                background-color: green;
+            }
+        }
+
+        .live-text {
+            color: white;
+            font-weight: bold;
+            margin-left: 10px; /* Shifted the dot a little bit to the right */
+            font-size: 40px; /* Adjusted size of the text */
+        }
+    </style>
+</head>
+<body>
+    <br>
+    <script src="https://denverlink.pages.dev/TP/js/jquery-3.5.1.min.js"></script>
+    <script src="https://denverlink.pages.dev/TP/js/bootstrap.bundle.min.js"></script>
+    <script src="https://denverlink.pages.dev/TP/js/owl.carousel.min.js"></script>
+    <script src="https://denverlink.pages.dev/TP/js/slider-radio.js"></script>
+    <script src="https://denverlink.pages.dev/TP/js/select2.min.js"></script>
+    <script src="https://denverlink.pages.dev/TP/js/smooth-scrollbar.js"></script>
+    <script src="https://denverlink.pages.dev/TP/js/jquery.magnific-popup.min.js"></script>
+    <script src="https://denverlink.pages.dev/TP/js/main.js"></script>
+
+    <img src="https://mdas109.github.io/TBL/TB.jpg" height="50" width="50" alt="Watch TataPlay Channels Live Here" />
+
+    <script src="https://content.jwplatform.com/libraries/KB5zFt7A.js"></script>
+    <script type="text/javascript">jwplayer.key = 'Khpp2dHxlBJHC8MCmLnBuV2jK/DwDnJMniwF6EO9HC/riJ712ZmbHg==';</script>
+    <br>
+    <div class="player-container">
+        <div style="margin: 12px;" id="myElement"></div>
+    </div>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('https://proxy.animebash.workers.dev/?u=https://play.denver1769.in/get.php?id=127')
+                .then(response => response.json())
+                .then(data => {
+                    const channelUrl = data.channel__url;
+                    const keyId = data.keyid;
+                    const key = data.key;
+                    const channelLogo = data.channel_logo; // Assuming these fields exist in your JSON response
+                    const channelName = data.channel_name;
+                    const programTitle = data.title;
+                    const programDescription = data.description;
+                    const programStartTime = data.start_time;
+                    const programEndTime = data.end_time;
+
+                    jwplayer("myElement").setup({
+                        autostart: true,
+                        preload: "none",
+                        repeat: true,
+                        volume: 100,
+                        mute: false,
+                        stretching: "exactfit",
+                        width: "",
+                        aspectratio: "16:9",
+                        playlist: [
+                            {
+                                sources: [
+                                    {
+                                        default: false,
+                                        type: "mpd",
+                                        file: channelUrl,
+                                        drm: {
+                                            clearkey: {
+                                                key: key,
+                                                keyId: keyId
+                                            }
+                                        },
+                                        label: channelName
+                                    }
+                                ]
+                            }
+                        ],
+                        primary: "html5",
+                        hlshtml: true
+                    });
+
+                    // Update program details
+                    document.title = channelName;
+                    const link = document.createElement('link');
+                    link.rel = 'shortcut icon';
+                    link.type = 'image/png';
+                    link.href = channelLogo;
+                    document.head.appendChild(link);
+
+                    document.querySelector('.logo').src = channelLogo;
+                    document.querySelector('.channel-name').innerText = channelName;
+                    document.querySelector('.program-title').innerText = 'Program: ' + programTitle;
+                    document.querySelector('.program-description').innerText = 'Description: ' + programDescription;
+                    document.querySelector('.program-timing').innerText = 'Start Time: ' + programStartTime + ' - End Time: ' + programEndTime;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        });
+    </script>
+
+    <br>
+    <br>
+    <br>
+<br>
+<div class="live-indicator">
+        <div class="blink-dot"></div>
+        <div class="live-text">Watching Live</div>
+    </div>
+    <div id="channelInfo">
+		<div style="margin: 12px;" class="program-info">
+    <img class="logo" src="https://iili.io/Jn2BLen.gif'" alt="Logo">            <span class="channel-name">Loading...<br><span class="live-text" style="color:brown"></span></span>
+<br>
+<br>
+          <div class="program-title">Program: Loading...<br></div>
+<br>
+          <div class="program-description">Description: Loading...</div>
+            <div class="program-timing">Start Time: Loading... - End Time: Loading...</div>
+        </div>
+    </div>
+</body>
+</html>
